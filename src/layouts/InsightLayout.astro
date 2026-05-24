@@ -1,0 +1,159 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: Date;
+  author: string;
+  tags: string[];
+  readingTime?: string;
+}
+
+const { title, description, publishDate, author, tags, readingTime } = Astro.props;
+
+const formattedDate = publishDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} — SnowOps Insights`} description={description}>
+  <article>
+    <!-- Header -->
+    <header class="border-b border-snow-200 bg-snow-50">
+      <Container width="narrow">
+        <div class="py-20">
+          <Eyebrow>
+            <a href="/insights" class="hover:text-glacier-500">← Insights</a>
+          </Eyebrow>
+          <h1 class="mt-6 text-3xl font-semibold leading-tight tracking-tight text-ink-900 sm:text-4xl lg:text-5xl">
+            {title}
+          </h1>
+          <p class="mt-6 text-lg leading-relaxed text-slate-600">{description}</p>
+
+          <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3 border-t border-snow-200 pt-6 mono-label text-slate-500">
+            <span>{author}</span>
+            <span>·</span>
+            <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+            {readingTime && (
+              <>
+                <span>·</span>
+                <span>{readingTime}</span>
+              </>
+            )}
+          </div>
+
+          {
+            tags.length > 0 && (
+              <ul class="mt-5 flex flex-wrap gap-2">
+                {tags.map((t) => (
+                  <li class="border border-snow-200 bg-white px-3 py-1.5 font-mono text-xs text-ink-900">
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            )
+          }
+        </div>
+      </Container>
+    </header>
+
+    <!-- Body -->
+    <section class="border-b border-snow-200 bg-white">
+      <Container width="narrow">
+        <div class="insight-body py-20">
+          <slot />
+        </div>
+      </Container>
+    </section>
+
+    <!-- CTA -->
+    <section class="border-b border-ink-800 bg-ink-950 text-snow-50">
+      <Container width="narrow">
+        <div class="flex flex-col items-start gap-6 py-16 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <Eyebrow tone="inverse">Want this in your stack?</Eyebrow>
+            <h2 class="mt-4 text-2xl font-semibold tracking-tight sm:text-3xl">
+              The TAR maps the gap. The sprint closes it.
+            </h2>
+          </div>
+          <Button href="/contact" class="!border-snow-50 !bg-snow-50 !text-ink-900 hover:!border-glacier-300 hover:!bg-glacier-300">
+            Request assessment
+          </Button>
+        </div>
+      </Container>
+    </section>
+  </article>
+</BaseLayout>
+
+<style is:global>
+  .insight-body {
+    color: #334155;
+    font-size: 1.0625rem;
+    line-height: 1.75;
+  }
+  .insight-body > * + * { margin-top: 1.4em; }
+  .insight-body h2 {
+    margin-top: 2.5em;
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: #0b1220;
+    line-height: 1.3;
+  }
+  .insight-body h3 {
+    margin-top: 2em;
+    font-size: 1.175rem;
+    font-weight: 600;
+    color: #0b1220;
+    line-height: 1.4;
+  }
+  .insight-body p { color: #334155; }
+  .insight-body a { color: #1d4ed8; text-decoration: none; }
+  .insight-body a:hover { text-decoration: underline; }
+  .insight-body strong { color: #0b1220; font-weight: 600; }
+  .insight-body ul, .insight-body ol {
+    padding-left: 1.25em;
+    margin: 1.25em 0;
+  }
+  .insight-body ul { list-style: disc; }
+  .insight-body ol { list-style: decimal; }
+  .insight-body li { margin: 0.4em 0; padding-left: 0.25em; }
+  .insight-body li::marker { color: #1d4ed8; }
+  .insight-body code {
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+    padding: 0.1em 0.45em;
+    font-size: 0.9em;
+    color: #0b1220;
+    font-family: var(--font-mono);
+  }
+  .insight-body pre {
+    border: 1px solid #1e293b;
+    background: #0b1220;
+    color: #f8fafc;
+    padding: 1.25em 1.5em;
+    overflow-x: auto;
+    font-size: 0.85em;
+    line-height: 1.7;
+    margin: 1.75em 0;
+  }
+  .insight-body pre code {
+    background: transparent;
+    border: 0;
+    padding: 0;
+    color: inherit;
+  }
+  .insight-body blockquote {
+    border-left: 2px solid #1d4ed8;
+    padding-left: 1.25em;
+    color: #475569;
+    font-style: italic;
+    margin: 1.75em 0;
+  }
+</style>

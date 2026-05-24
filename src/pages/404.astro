@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<BaseLayout
+  title="Not found — SnowOps"
+  description="The page you were looking for does not exist."
+  noindex
+>
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="mx-auto max-w-2xl py-32 text-center">
+        <p class="font-mono text-7xl font-medium tracking-tight text-ink-900 sm:text-8xl">404</p>
+        <Eyebrow class="mt-6 text-center">Resource not found</Eyebrow>
+        <h1 class="mt-5 text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
+          That URL doesn't exist —<br />or doesn't exist <span class="text-glacier-500">yet</span>.
+        </h1>
+        <p class="mt-6 text-base leading-relaxed text-slate-600">
+          Check the URL, or head back to one of the routes below.
+        </p>
+        <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button href="/" variant="ghost" icon="lucide:home">Home</Button>
+          <Button href="/contact">Free Assessment</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  href?: string;
+  class?: string;
+  tone?: 'light' | 'dark';
+  padding?: 'sm' | 'md' | 'lg';
+}
+
+const {
+  href,
+  class: className = '',
+  tone = 'light',
+  padding = 'md',
+} = Astro.props;
+
+const tones: Record<NonNullable<Props['tone']>, string> = {
+  light: 'border-snow-200 bg-white text-ink-900',
+  dark: 'border-ink-800 bg-ink-900 text-snow-50',
+};
+
+const paddings: Record<NonNullable<Props['padding']>, string> = {
+  sm: 'p-5',
+  md: 'p-7',
+  lg: 'p-9',
+};
+
+const base = `block border ${tones[tone]} ${paddings[padding]} transition-colors`;
+const interactive = href ? 'hover:border-ink-900 hover:shadow-[0_1px_0_0_var(--color-ink-900)] focus-visible:border-ink-900' : '';
+
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag class={`${base} ${interactive} ${className}`} href={href}>
+  <slot />
+</Tag>

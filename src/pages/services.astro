@@ -1,0 +1,223 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import ServicePillar from '../components/services/ServicePillar.astro';
+import DiagramCallout from '../components/services/DiagramCallout.astro';
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+
+import platformDiagram from '../assets/diagrams/platform-architecture.svg';
+import complianceDiagram from '../assets/diagrams/compliance-pipeline.svg';
+
+const securityPrinciples = [
+  { label: 'Least privilege', body: 'IAM scoped per workload. Wildcard policies fail CI.' },
+  { label: 'Identity, not keys', body: 'OIDC, workload identity, short-lived credentials.' },
+  { label: 'Signed everything', body: 'Cosign-signed images. SBOMs attached. Drift blocked.' },
+  { label: 'Tamper-evident', body: 'Append-only audit logs. Evidence ships with the deploy.' },
+];
+---
+
+<BaseLayout
+  title="Services — Platform engineering and compliance, delivered as code"
+  description="Terraform, Kubernetes / EKS, CI/CD governance, and policy-as-code — engineered as a single platform, with SOC 2 and ISO 27001 controls embedded by default."
+>
+  <!-- HERO -->
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="grid gap-12 py-20 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <Eyebrow>Capabilities</Eyebrow>
+          <h1 class="mt-5 text-4xl font-semibold leading-tight tracking-tight text-ink-900 sm:text-5xl">
+            We deliver code and pipelines.<br />
+            <span class="text-glacier-500">Not runbooks for human clicking.</span>
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
+            Four disciplines. One operating model. Every engagement combines them — so there are no gaps for your team to plug, no spreadsheets pretending to be governance, and nothing your auditor can't see.
+          </p>
+          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <Button href="/contact">Free Cloud Governance Assessment</Button>
+            <Button href="/process" variant="ghost" icon="lucide:workflow">How we deliver</Button>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="bg-white">
+    <Container>
+      <ServicePillar
+        id="terraform"
+        number="01 · Terraform & IaC"
+        icon="lucide:layers"
+        title="Versioned infrastructure. Reviewed like product code."
+        summary="A module library tailored to your accounts, your topology, your compliance posture. Drift detection in CI. State managed and locked. Every change ships through PR review with policy gates."
+        bullets={[
+          'Curated Terraform module library',
+          'State backend hardening + remote locking',
+          'Drift detection on every PR + nightly',
+          'Multi-account scaffolding (AWS Organizations, GCP folders)',
+          'OPA / Conftest policy gates pre-plan',
+          'Secrets via cloud KMS — never in state',
+        ]}
+        outcomes="A reproducible, reviewable platform that an auditor can verify in minutes."
+      >
+        <DiagramCallout label="platform.tf" caption="versioned">
+          <Image src={platformDiagram} alt="Platform architecture diagram showing flow from developers through CI, policy enforcement, and IaC to cloud." class="h-auto w-full" />
+        </DiagramCallout>
+      </ServicePillar>
+
+      <ServicePillar
+        id="kubernetes"
+        number="02 · Kubernetes / EKS"
+        icon="lucide:box"
+        title="Production-grade clusters. GitOps-first."
+        summary="Clusters designed for scale, isolation, and identity. Workloads deployed by Argo or Flux — never kubectl-by-hand. Network policy on, secrets brokered, autoscaling tuned, upgrades automated."
+        bullets={[
+          'EKS / GKE / AKS cluster design',
+          'Argo CD or Flux GitOps pipelines',
+          'Workload identity (IRSA, GKE WI)',
+          'Network policy + service mesh as needed',
+          'Cluster autoscaler + Karpenter tuning',
+          'Patched, version-managed upgrade flow',
+        ]}
+        outcomes="A cluster your team can ship to confidently, and your auditor can review without surprises."
+        reverse
+      >
+        <DiagramCallout label="cluster.yaml" caption="gitops">
+          <div class="font-mono text-[11px] leading-[1.7] text-slate-600">
+            <pre class="overflow-x-auto"><code>{`apiVersion: argoproj.io/v1
+kind: Application
+metadata:
+  name: platform
+spec:
+  project: snowops
+  source:
+    repoURL: git@github.com/acme/infra
+    path: clusters/prod
+    targetRevision: main
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: platform
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+      - CreateNamespace=true`}</code></pre>
+          </div>
+        </DiagramCallout>
+      </ServicePillar>
+
+      <ServicePillar
+        id="cicd"
+        number="03 · CI/CD Governance"
+        icon="lucide:git-branch"
+        title="Pipelines that enforce themselves."
+        summary="Builds are signed. Promotions are gated. Approvals are code, not Slack messages. Every artifact carries an attestation; every environment knows what it's allowed to run."
+        bullets={[
+          'GitHub Actions or GitLab CI hardening',
+          'OIDC-based cloud auth (no static keys)',
+          'Cosign signing + SBOM attestation',
+          'Environment promotion via PR',
+          'Required-reviewer policies enforced',
+          'Reusable, audited workflow libraries',
+        ]}
+        outcomes="A change pipeline that satisfies CC1 / CC8 controls without a human auditor babysitting it."
+      >
+        <DiagramCallout label="release.yml" caption="signed">
+          <div class="font-mono text-[11px] leading-[1.7] text-slate-600">
+            <pre class="overflow-x-auto"><code>{`permissions:
+  id-token: write
+  contents: read
+  attestations: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/build-push-action@v6
+      - uses: sigstore/cosign-installer@v3
+      - run: cosign sign --yes \${IMAGE}
+      - uses: actions/attest-build-provenance@v1
+        with:
+          subject-name: \${IMAGE}`}</code></pre>
+          </div>
+        </DiagramCallout>
+      </ServicePillar>
+
+      <ServicePillar
+        id="policy-as-code"
+        number="04 · Policy as Code"
+        icon="lucide:scroll-text"
+        title="SOC 2 and ISO 27001 controls — enforced in the pipeline."
+        summary="We translate your control framework into executable policy. Kyverno for the cluster, OPA / Conftest for CI, custom rules where your auditor needs them. Evidence is collected continuously and packaged on demand."
+        bullets={[
+          'SOC 2 / ISO 27001 control mapping',
+          'Kyverno cluster policies',
+          'OPA / Conftest CI policies',
+          'Continuous evidence collection',
+          'Auditor-ready evidence packages',
+          'Policy versioning + change history',
+        ]}
+        outcomes="Audits close in days. New controls ship like features."
+        reverse
+      >
+        <DiagramCallout label="evidence.pipeline" caption="continuous" tone="light">
+          <Image src={complianceDiagram} alt="Compliance pipeline diagram: control library mapped to policy-as-code, enforced at CI and cluster, with continuous evidence and audit-ready dashboard." class="h-auto w-full" />
+        </DiagramCallout>
+      </ServicePillar>
+    </Container>
+  </section>
+
+  <!-- SECURITY BY DEFAULT BAND -->
+  <section id="security-by-default" class="border-y border-ink-800 bg-ink-900 text-snow-50">
+    <Container>
+      <div class="grid gap-12 py-20 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <SectionHeading
+            eyebrow="Security by default"
+            title="Zero-trust isn't a slogan. It's the wiring."
+            description="The defaults of every platform we ship — every cluster, every pipeline, every IAM policy — are built on these four principles. No opt-in. No 'we'll harden it later.'"
+            tone="dark"
+          />
+        </div>
+        <div class="lg:col-span-7">
+          <div class="grid gap-px border border-ink-800 bg-ink-800 sm:grid-cols-2">
+            {
+              securityPrinciples.map((p) => (
+                <div class="bg-ink-900 p-6">
+                  <p class="mono-label text-glacier-300">{p.label}</p>
+                  <p class="mt-4 text-base leading-relaxed text-slate-200">{p.body}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="flex flex-col items-start gap-6 py-20 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <Eyebrow>Engagement</Eyebrow>
+          <h2 class="mt-5 text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
+            Start with an assessment. Decide on a sprint.
+          </h2>
+          <p class="mt-5 text-base leading-relaxed text-slate-600">
+            The TAR (Technical Assessment Report) is free, takes ~2 weeks, and requires no backend access. From there we propose a scoped engagement — typically 2–6 sprints.
+          </p>
+        </div>
+        <Button href="/contact">Request your TAR</Button>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

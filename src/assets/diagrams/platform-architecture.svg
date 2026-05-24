@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" role="img" aria-label="Platform architecture diagram">
+  <style>
+    .label { font: 600 11px ui-monospace, 'JetBrains Mono', monospace; fill: #0b1220; letter-spacing: 0.02em; }
+    .sub { font: 500 9px ui-monospace, 'JetBrains Mono', monospace; fill: #64748b; letter-spacing: 0.08em; text-transform: uppercase; }
+    .stroke { fill: none; stroke: #334155; stroke-width: 1.25; }
+    .accent { fill: none; stroke: #1d4ed8; stroke-width: 1.5; }
+    .dot { fill: #1d4ed8; }
+    .box { fill: #ffffff; stroke: #334155; stroke-width: 1.25; }
+    .ghost { fill: #f8fafc; stroke: #cbd5e1; stroke-width: 1; }
+  </style>
+
+  <!-- developer layer -->
+  <text x="20" y="32" class="sub">01 · DEVELOPERS</text>
+  <rect x="20" y="44" width="120" height="42" class="box" />
+  <text x="32" y="61" class="label">git push</text>
+  <text x="32" y="78" class="sub">feature branch</text>
+
+  <!-- CI -->
+  <text x="180" y="32" class="sub">02 · CI/CD</text>
+  <rect x="180" y="44" width="160" height="42" class="box" />
+  <text x="192" y="61" class="label">signed pipeline</text>
+  <text x="192" y="78" class="sub">opa · cosign · sbom</text>
+
+  <!-- Policy gate -->
+  <text x="380" y="32" class="sub">03 · POLICY</text>
+  <rect x="380" y="44" width="120" height="42" class="box" />
+  <text x="392" y="61" class="label">policy-as-code</text>
+  <text x="392" y="78" class="sub">kyverno · conftest</text>
+
+  <!-- Registry -->
+  <text x="540" y="32" class="sub">04 · REGISTRY</text>
+  <rect x="540" y="44" width="80" height="42" class="box" />
+  <text x="552" y="61" class="label">artifacts</text>
+  <text x="552" y="78" class="sub">signed</text>
+
+  <!-- arrows row 1 -->
+  <path d="M140 65 L180 65" class="accent" />
+  <polygon points="180,65 172,61 172,69" class="dot" />
+  <path d="M340 65 L380 65" class="accent" />
+  <polygon points="380,65 372,61 372,69" class="dot" />
+  <path d="M500 65 L540 65" class="accent" />
+  <polygon points="540,65 532,61 532,69" class="dot" />
+
+  <!-- vertical drop -->
+  <path d="M260 86 L260 150" class="stroke" />
+  <polygon points="260,150 256,142 264,142" fill="#334155" />
+
+  <!-- IaC plane -->
+  <text x="20" y="170" class="sub">05 · INFRASTRUCTURE AS CODE</text>
+  <rect x="20" y="184" width="600" height="76" class="box" />
+  <line x1="220" y1="184" x2="220" y2="260" stroke="#cbd5e1" stroke-width="1" />
+  <line x1="420" y1="184" x2="420" y2="260" stroke="#cbd5e1" stroke-width="1" />
+
+  <text x="36" y="208" class="label">terraform modules</text>
+  <text x="36" y="226" class="sub">network · iam · data</text>
+  <text x="36" y="246" class="sub">drift detection on</text>
+
+  <text x="236" y="208" class="label">kubernetes / eks</text>
+  <text x="236" y="226" class="sub">argo · flux · gitops</text>
+  <text x="236" y="246" class="sub">workload identity</text>
+
+  <text x="436" y="208" class="label">observability</text>
+  <text x="436" y="226" class="sub">otel · prometheus</text>
+  <text x="436" y="246" class="sub">tamper-proof logs</text>
+
+  <!-- Cloud plane -->
+  <text x="20" y="294" class="sub">06 · TARGET CLOUD</text>
+  <rect x="20" y="308" width="600" height="62" class="ghost" />
+  <text x="36" y="332" class="label">aws · gcp · azure</text>
+  <text x="36" y="350" class="sub">multi-account · least-privilege · zero-trust</text>
+
+  <!-- side compliance bus -->
+  <line x1="540" y1="260" x2="540" y2="308" class="accent" stroke-dasharray="3 3" />
+  <text x="544" y="288" class="sub">audit</text>
+  <text x="544" y="300" class="sub">evidence</text>
+</svg>

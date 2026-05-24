@@ -1,0 +1,125 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import PhaseTimeline from '../components/process/PhaseTimeline.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<BaseLayout
+  title="Our Process — Seven phases, two-week sprints"
+  description="The SnowOps delivery model: Discovery, Contracting, Onboarding, Delivery Sprints, Compliance QA, Handover, and Post-Delivery Support. Live demos every two weeks."
+>
+  <!-- HERO -->
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="grid gap-12 py-20 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <Eyebrow>Operating model</Eyebrow>
+          <h1 class="mt-5 text-4xl font-semibold leading-tight tracking-tight text-ink-900 sm:text-5xl">
+            Seven phases.<br />
+            <span class="text-glacier-500">Two-week sprints.</span><br />
+            Live demos, every time.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
+            Every engagement runs the same disciplined path. No drift, no scope creep, no quarterly status decks. Just merged code, validated controls, and a working demo on a known cadence.
+          </p>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="grid grid-cols-2 gap-px border border-snow-200 bg-snow-200">
+            <div class="bg-white p-6">
+              <p class="font-mono text-3xl font-medium text-ink-900">2 wk</p>
+              <p class="mt-2 mono-label text-slate-500">Sprint length</p>
+            </div>
+            <div class="bg-white p-6">
+              <p class="font-mono text-3xl font-medium text-ink-900">100%</p>
+              <p class="mt-2 mono-label text-slate-500">Demo on day 10</p>
+            </div>
+            <div class="bg-white p-6">
+              <p class="font-mono text-3xl font-medium text-ink-900">Fixed</p>
+              <p class="mt-2 mono-label text-slate-500">Fee per sprint</p>
+            </div>
+            <div class="bg-white p-6">
+              <p class="font-mono text-3xl font-medium text-ink-900">Senior</p>
+              <p class="mt-2 mono-label text-slate-500">On every call</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="border-b border-snow-200 bg-white">
+    <Container>
+      <div class="py-20">
+        <SectionHeading
+          eyebrow="The seven phases"
+          title="From scoped discovery to a live, audit-ready handover."
+        />
+        <div class="mt-12">
+          <PhaseTimeline />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- SPRINT CADENCE CALLOUT -->
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="grid gap-12 py-20 lg:grid-cols-12 lg:items-center">
+        <div class="lg:col-span-6">
+          <Eyebrow>Sprint cadence</Eyebrow>
+          <h2 class="mt-5 text-3xl font-semibold tracking-tight text-ink-900 sm:text-4xl">
+            A working demo on day 10. Every sprint. No exceptions.
+          </h2>
+          <p class="mt-5 text-base leading-relaxed text-slate-600">
+            We don't ship slide decks. We ship merged code, running in your environment, that your engineers can poke at. Every sprint ends in a 30-minute demo with your team. If something isn't ready, we say so — and we don't bill the sprint.
+          </p>
+        </div>
+        <div class="lg:col-span-6">
+          <ol class="grid grid-cols-2 gap-px border border-snow-200 bg-snow-200">
+            <li class="bg-white p-6">
+              <span class="mono-label text-glacier-500">Day 1</span>
+              <p class="mt-3 text-sm text-slate-700">Sprint planning. Scope locked in writing.</p>
+            </li>
+            <li class="bg-white p-6">
+              <span class="mono-label text-glacier-500">Day 3</span>
+              <p class="mt-3 text-sm text-slate-700">First PRs in review. Daily async standups.</p>
+            </li>
+            <li class="bg-white p-6">
+              <span class="mono-label text-glacier-500">Day 7</span>
+              <p class="mt-3 text-sm text-slate-700">Mid-sprint sync. Risks surfaced, scope adjusted.</p>
+            </li>
+            <li class="bg-white p-6">
+              <span class="mono-label text-glacier-500">Day 10</span>
+              <p class="mt-3 text-sm text-slate-700">Live demo. Working code merged. Retro.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section class="border-b border-ink-800 bg-ink-950 text-snow-50">
+    <Container>
+      <div class="flex flex-col items-start gap-6 py-20 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <Eyebrow tone="inverse">Start the conversation</Eyebrow>
+          <h2 class="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+            The first phase costs nothing. The next is on you.
+          </h2>
+          <p class="mt-5 text-base leading-relaxed text-slate-300">
+            Discovery is free. You walk away with the TAR whether you engage us further or not.
+          </p>
+        </div>
+        <Button href="/contact" class="!border-snow-50 !bg-snow-50 !text-ink-900 hover:!border-glacier-300 hover:!bg-glacier-300">
+          Begin discovery
+        </Button>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

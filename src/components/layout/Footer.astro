@@ -1,0 +1,87 @@
+---
+import Container from './Container.astro';
+import { Icon } from 'astro-icon/components';
+
+const year = new Date().getFullYear();
+
+const cols = [
+  {
+    heading: 'Platform',
+    links: [
+      { label: 'Services', href: '/services' },
+      { label: 'Process', href: '/process' },
+      { label: 'Insights', href: '/insights' },
+    ],
+  },
+  {
+    heading: 'Firm',
+    links: [
+      { label: 'About', href: '/about' },
+      { label: 'Contact', href: '/contact' },
+      { label: 'Assessment', href: '/contact' },
+    ],
+  },
+  {
+    heading: 'Compliance',
+    links: [
+      { label: 'SOC 2 Type II', href: '/services#policy-as-code' },
+      { label: 'ISO 27001', href: '/services#policy-as-code' },
+      { label: 'Zero-trust defaults', href: '/services#security-by-default' },
+    ],
+  },
+];
+---
+
+<footer class="border-t border-ink-800 bg-ink-950 text-snow-100">
+  <Container>
+    <div class="grid gap-12 py-16 md:grid-cols-12">
+      <div class="md:col-span-5">
+        <a href="/" class="flex items-center gap-2.5" aria-label="SnowOps home">
+          <span class="grid h-7 w-7 place-items-center border border-snow-50 bg-snow-50 text-ink-950 font-mono text-[11px] font-bold tracking-tight">SO</span>
+          <span class="font-mono text-sm font-semibold tracking-tight">
+            snow<span class="text-glacier-300">/</span>ops
+          </span>
+        </a>
+        <p class="mt-5 max-w-sm text-sm text-slate-400">
+          Audit-ready cloud infrastructure, governance, and compliance — engineered as code, delivered by a boutique team.
+        </p>
+        <p class="mt-8 mono-label text-slate-500">
+          Boutique · Engineering-led · Compliance-native
+        </p>
+      </div>
+
+      {
+        cols.map((col) => (
+          <div class="md:col-span-2">
+            <p class="mono-label text-slate-500">{col.heading}</p>
+            <ul class="mt-5 space-y-3">
+              {col.links.map((link) => (
+                <li>
+                  <a href={link.href} class="text-sm text-snow-100 transition-colors hover:text-glacier-300">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+
+      <div class="md:col-span-1">
+        <p class="mono-label text-slate-500">Reach</p>
+        <ul class="mt-5 space-y-3 text-sm">
+          <li>
+            <a href="mailto:hello@snowops.net" class="inline-flex items-center gap-2 text-snow-100 transition-colors hover:text-glacier-300">
+              <Icon name="lucide:mail" class="h-3.5 w-3.5" /> Email
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-3 border-t border-ink-800 py-6 sm:flex-row sm:items-center sm:justify-between">
+      <p class="font-mono text-xs text-slate-500">© {year} SnowOps. All rights reserved.</p>
+      <p class="font-mono text-xs text-slate-500">Built on Cloudflare. Shipped as code.</p>
+    </div>
+  </Container>
+</footer>

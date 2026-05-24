@@ -1,0 +1,36 @@
+---
+import { Icon } from 'astro-icon/components';
+
+interface Props {
+  href: string;
+  variant?: 'primary' | 'ghost' | 'link';
+  icon?: string;
+  class?: string;
+  external?: boolean;
+}
+
+const {
+  href,
+  variant = 'primary',
+  icon = 'lucide:arrow-right',
+  class: className = '',
+  external = false,
+} = Astro.props;
+
+const variants: Record<NonNullable<Props['variant']>, string> = {
+  primary:
+    'inline-flex items-center gap-2 border border-ink-900 bg-ink-900 px-5 py-3 mono-label text-snow-50 transition-colors hover:bg-glacier-500 hover:border-glacier-500',
+  ghost:
+    'inline-flex items-center gap-2 border border-snow-200 bg-transparent px-5 py-3 mono-label text-ink-900 transition-colors hover:border-ink-900',
+  link:
+    'inline-flex items-center gap-1.5 mono-label text-ink-900 transition-colors hover:text-glacier-500 group',
+};
+
+const rel = external ? 'noopener noreferrer' : undefined;
+const target = external ? '_blank' : undefined;
+---
+
+<a href={href} class={`${variants[variant]} ${className}`} rel={rel} target={target}>
+  <slot />
+  <Icon name={icon} class={variant === 'link' ? 'h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5' : 'h-3.5 w-3.5'} />
+</a>

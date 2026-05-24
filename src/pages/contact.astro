@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import AssessmentForm from '../components/contact/AssessmentForm.astro';
+import { Icon } from 'astro-icon/components';
+
+const expectations = [
+  {
+    icon: 'lucide:clock',
+    title: 'Response within 1 business day',
+    body: 'A founder reads every form. You\'ll hear from us, not from a sequence.',
+  },
+  {
+    icon: 'lucide:shield',
+    title: 'No backend access required',
+    body: 'The TAR is read-only by design. We work from your existing docs, repos, and a discovery call.',
+  },
+  {
+    icon: 'lucide:file-text',
+    title: 'Written Technical Assessment Report',
+    body: 'Within ~2 weeks. Yours to keep, share, or take to your auditor — engagement or not.',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact — Request your Free Cloud Governance Assessment"
+  description="Start with a free Technical Assessment Report. No backend access required. Response within one business day."
+>
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="grid gap-16 py-20 lg:grid-cols-12 lg:gap-12">
+        <div class="lg:col-span-5">
+          <Eyebrow>Free assessment</Eyebrow>
+          <h1 class="mt-5 text-4xl font-semibold leading-tight tracking-tight text-ink-900 sm:text-5xl">
+            Free Cloud<br />
+            <span class="text-glacier-500">Governance Assessment.</span>
+          </h1>
+          <p class="mt-6 text-lg leading-relaxed text-slate-600">
+            The TAR — Technical Assessment Report — is a written analysis of your current platform and compliance posture, the highest-leverage gaps, and what we'd do in the first two sprints to close them.
+          </p>
+          <p class="mt-4 text-base leading-relaxed text-slate-600">
+            It costs nothing. It requires no backend access. You keep it whether you engage us further or not.
+          </p>
+
+          <ul class="mt-10 space-y-6 border-t border-snow-200 pt-8">
+            {
+              expectations.map((e) => (
+                <li class="flex gap-4">
+                  <span class="grid h-10 w-10 shrink-0 place-items-center border border-snow-200 bg-white text-glacier-500">
+                    <Icon name={e.icon} class="h-4 w-4" />
+                  </span>
+                  <div>
+                    <p class="font-semibold text-ink-900">{e.title}</p>
+                    <p class="mt-1 text-sm leading-relaxed text-slate-600">{e.body}</p>
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+
+          <p class="mt-10 border-t border-snow-200 pt-6 mono-label text-slate-500">
+            Or email <a class="text-ink-900 hover:text-glacier-500" href="mailto:hello@snowops.net">hello@snowops.net</a>
+          </p>
+        </div>
+
+        <div class="lg:col-span-7">
+          <div class="border border-snow-200 bg-white p-8 sm:p-10">
+            <div class="mb-6 flex items-center justify-between border-b border-snow-200 pb-4">
+              <p class="mono-label text-slate-500">assessment.request</p>
+              <p class="mono-label text-glacier-500">secure</p>
+            </div>
+            <AssessmentForm />
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

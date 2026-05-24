@@ -1,0 +1,26 @@
+---
+import Container from '../layout/Container.astro';
+import Button from '../ui/Button.astro';
+import Eyebrow from '../ui/Eyebrow.astro';
+---
+
+<section class="border-b border-ink-800 bg-ink-950 text-snow-50">
+  <Container>
+    <div class="grid gap-10 py-20 lg:grid-cols-12 lg:items-end">
+      <div class="lg:col-span-8">
+        <Eyebrow tone="inverse">Free assessment · no backend access required</Eyebrow>
+        <h2 class="mt-5 text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+          Start with a <span class="text-glacier-300">Technical Assessment Report</span> — proof of competence before any contract.
+        </h2>
+        <p class="mt-6 max-w-2xl text-base leading-relaxed text-slate-300">
+          We review your current cloud posture, identify the highest-leverage compliance and platform gaps, and deliver a written TAR you can take to your board or your auditor.
+        </p>
+      </div>
+      <div class="lg:col-span-4 lg:text-right">
+        <Button href="/contact" class="!border-snow-50 !bg-snow-50 !text-ink-900 hover:!border-glacier-300 hover:!bg-glacier-300">
+          Request your TAR
+        </Button>
+      </div>
+    </div>
+  </Container>
+</section>

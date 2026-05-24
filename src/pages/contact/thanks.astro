@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/layout/Container.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import Button from '../../components/ui/Button.astro';
+import { Icon } from 'astro-icon/components';
+---
+
+<BaseLayout
+  title="Request received — SnowOps"
+  description="Your assessment request has been received. A founder will respond within one business day."
+  noindex
+>
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="mx-auto max-w-2xl py-32 text-center">
+        <span class="mx-auto grid h-14 w-14 place-items-center border border-glacier-500 bg-white text-glacier-500">
+          <Icon name="lucide:check" class="h-6 w-6" />
+        </span>
+        <Eyebrow class="mt-8 text-center">Request received</Eyebrow>
+        <h1 class="mt-5 text-4xl font-semibold tracking-tight text-ink-900 sm:text-5xl">
+          We'll be in touch within<br /><span class="text-glacier-500">one business day.</span>
+        </h1>
+        <p class="mt-6 text-lg leading-relaxed text-slate-600">
+          A founder will read your request and respond personally — usually with a few clarifying questions and a calendar link for a 30-minute discovery call.
+        </p>
+        <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <Button href="/" variant="ghost" icon="lucide:arrow-left">Back to home</Button>
+          <Button href="/insights">Read our insights</Button>
+        </div>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

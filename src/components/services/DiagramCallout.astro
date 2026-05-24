@@ -1,0 +1,25 @@
+---
+interface Props {
+  label: string;
+  caption?: string;
+  tone?: 'light' | 'dark';
+}
+
+const { label, caption, tone = 'light' } = Astro.props;
+
+const surface =
+  tone === 'dark'
+    ? 'border-ink-800 bg-ink-950 text-snow-50'
+    : 'border-snow-200 bg-white text-ink-900';
+
+const sub = tone === 'dark' ? 'text-slate-400' : 'text-slate-500';
+const accent = tone === 'dark' ? 'text-glacier-300' : 'text-glacier-500';
+---
+
+<figure class={`border ${surface} p-5`}>
+  <figcaption class={`mb-4 flex items-center justify-between border-b pb-3 ${tone === 'dark' ? 'border-ink-800' : 'border-snow-200'}`}>
+    <span class={`mono-label ${sub}`}>{label}</span>
+    {caption && <span class={`mono-label ${accent}`}>{caption}</span>}
+  </figcaption>
+  <slot />
+</figure>

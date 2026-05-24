@@ -1,0 +1,120 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const accessKey = import.meta.env.PUBLIC_WEB3FORMS_KEY ?? 'YOUR_WEB3FORMS_ACCESS_KEY';
+const redirect = new URL('/contact/thanks', Astro.site).toString();
+---
+
+<form
+  action="https://api.web3forms.com/submit"
+  method="POST"
+  class="grid gap-6"
+>
+  <input type="hidden" name="access_key" value={accessKey} />
+  <input type="hidden" name="subject" value="New TAR request via snowops.net" />
+  <input type="hidden" name="from_name" value="SnowOps Website" />
+  <input type="hidden" name="redirect" value={redirect} />
+  <!-- honeypot -->
+  <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" />
+
+  <div class="grid gap-6 sm:grid-cols-2">
+    <label class="flex flex-col gap-2">
+      <span class="mono-label text-slate-500">Name <span class="text-glacier-500">*</span></span>
+      <input
+        type="text"
+        name="name"
+        required
+        autocomplete="name"
+        class="border border-snow-200 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-ink-900 focus:outline-none"
+        placeholder="Alex Chen"
+      />
+    </label>
+
+    <label class="flex flex-col gap-2">
+      <span class="mono-label text-slate-500">Work email <span class="text-glacier-500">*</span></span>
+      <input
+        type="email"
+        name="email"
+        required
+        autocomplete="email"
+        class="border border-snow-200 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-ink-900 focus:outline-none"
+        placeholder="alex@acme.co"
+      />
+    </label>
+
+    <label class="flex flex-col gap-2">
+      <span class="mono-label text-slate-500">Company <span class="text-glacier-500">*</span></span>
+      <input
+        type="text"
+        name="company"
+        required
+        autocomplete="organization"
+        class="border border-snow-200 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-ink-900 focus:outline-none"
+        placeholder="Acme Inc."
+      />
+    </label>
+
+    <label class="flex flex-col gap-2">
+      <span class="mono-label text-slate-500">Role <span class="text-glacier-500">*</span></span>
+      <input
+        type="text"
+        name="role"
+        required
+        class="border border-snow-200 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-ink-900 focus:outline-none"
+        placeholder="VP Engineering"
+      />
+    </label>
+
+    <label class="flex flex-col gap-2">
+      <span class="mono-label text-slate-500">Primary cloud</span>
+      <select
+        name="cloud"
+        class="border border-snow-200 bg-white px-4 py-3 text-sm text-ink-900 focus:border-ink-900 focus:outline-none"
+      >
+        <option value="AWS">AWS</option>
+        <option value="GCP">GCP</option>
+        <option value="Azure">Azure</option>
+        <option value="Multi">Multi-cloud</option>
+        <option value="Other">Other</option>
+      </select>
+    </label>
+
+    <label class="flex flex-col gap-2">
+      <span class="mono-label text-slate-500">Engineering team size</span>
+      <select
+        name="team_size"
+        class="border border-snow-200 bg-white px-4 py-3 text-sm text-ink-900 focus:border-ink-900 focus:outline-none"
+      >
+        <option value="1-10">1–10</option>
+        <option value="11-25">11–25</option>
+        <option value="26-50">26–50</option>
+        <option value="51-100">51–100</option>
+        <option value="100+">100+</option>
+      </select>
+    </label>
+  </div>
+
+  <label class="flex flex-col gap-2">
+    <span class="mono-label text-slate-500">What's driving this? <span class="text-glacier-500">*</span></span>
+    <textarea
+      name="message"
+      required
+      rows="5"
+      class="border border-snow-200 bg-white px-4 py-3 text-sm text-ink-900 placeholder:text-slate-400 focus:border-ink-900 focus:outline-none"
+      placeholder="We're three months out from a SOC 2 audit and our IaC is half-Terraform, half-clickops. Looking for help getting the platform audit-ready before Q3 reviews."
+    ></textarea>
+  </label>
+
+  <div class="flex flex-col items-start gap-4 border-t border-snow-200 pt-6 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-xs text-slate-500">
+      We respond within one business day. No backend access needed for the assessment.
+    </p>
+    <button
+      type="submit"
+      class="inline-flex items-center gap-2 border border-ink-900 bg-ink-900 px-6 py-3 mono-label text-snow-50 transition-colors hover:bg-glacier-500 hover:border-glacier-500"
+    >
+      Request the TAR
+      <Icon name="lucide:arrow-right" class="h-3.5 w-3.5" />
+    </button>
+  </div>
+</form>

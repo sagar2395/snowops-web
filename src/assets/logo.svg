@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 28" role="img" aria-label="SnowOps">
+  <g fill="currentColor" font-family="ui-monospace, 'JetBrains Mono', monospace" font-weight="600" font-size="18" letter-spacing="-0.6">
+    <text x="0" y="20">snow</text>
+    <text x="58" y="20" fill="#1d4ed8">/</text>
+    <text x="70" y="20">ops</text>
+  </g>
+  <g stroke="currentColor" stroke-width="1.2" opacity="0.35">
+    <line x1="115" y1="8" x2="115" y2="20" />
+  </g>
+  <g fill="currentColor" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="9" letter-spacing="2" opacity="0.55">
+    <text x="122" y="17">PLATFORM</text>
+  </g>
+</svg>

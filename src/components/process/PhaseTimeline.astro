@@ -1,0 +1,153 @@
+---
+import { Icon } from 'astro-icon/components';
+
+const phases = [
+  {
+    number: '01',
+    title: 'Discovery',
+    duration: '~1 week',
+    icon: 'lucide:search',
+    body: 'Scoped read-only review of your current cloud posture, IaC repos, CI pipelines, and compliance status. Output: a written Technical Assessment Report (TAR).',
+    artifacts: ['Technical Assessment Report', 'Prioritized gap list', 'Proposed sprint plan'],
+  },
+  {
+    number: '02',
+    title: 'Contracting',
+    duration: '~1 week',
+    icon: 'lucide:file-signature',
+    body: 'Scope, cadence, deliverables, and acceptance criteria locked in writing. Fixed-fee per sprint. No surprise change orders.',
+    artifacts: ['Statement of Work', 'Sprint deliverables matrix', 'Acceptance criteria'],
+  },
+  {
+    number: '03',
+    title: 'Onboarding',
+    duration: '~3 days',
+    icon: 'lucide:key',
+    body: 'Access provisioning, tooling alignment, environment access, comms cadence. We meet your team, your stack, and your auditor.',
+    artifacts: ['Access matrix', 'Communication channels', 'Kickoff session'],
+  },
+  {
+    number: '04',
+    title: 'Delivery Sprints',
+    duration: '2 weeks per sprint',
+    icon: 'lucide:rocket',
+    body: 'Two-week agile sprints. Each ends with a live demo of working, merged-to-main code. No mocks, no proofs-of-concept that never ship. Velocity is the deliverable.',
+    artifacts: ['Working code merged to main', 'Live sprint demo', 'Updated documentation'],
+    highlight: true,
+  },
+  {
+    number: '05',
+    title: 'Compliance QA',
+    duration: '1 week per milestone',
+    icon: 'lucide:shield-check',
+    body: 'Every milestone runs through control validation. Policy gates verified. Evidence pipelines tested. Audit narrative drafted alongside the engineering work, not after.',
+    artifacts: ['Control coverage report', 'Evidence package', 'Auditor walkthrough doc'],
+  },
+  {
+    number: '06',
+    title: 'Handover',
+    duration: '~1 week',
+    icon: 'lucide:package',
+    body: 'Code, runbooks, on-call docs, and architecture decision records transferred to your team. Live training sessions until your engineers own the platform.',
+    artifacts: ['Operating runbooks', 'ADR archive', 'Team training sessions'],
+  },
+  {
+    number: '07',
+    title: 'Post-Delivery Support',
+    duration: 'Retainer',
+    icon: 'lucide:life-buoy',
+    body: 'Optional retainer for ongoing platform evolution, audit cycle support, and on-demand expertise. SLA-backed. Senior-only response.',
+    artifacts: ['Quarterly platform review', 'Audit cycle support', 'On-demand consults'],
+  },
+];
+---
+
+<div class="space-y-px border border-snow-200 bg-snow-200">
+  {
+    phases.map((p) => (
+      <article
+        class:list={[
+          'grid gap-8 p-7 sm:grid-cols-12 sm:gap-10 sm:p-10',
+          p.highlight ? 'bg-ink-900 text-snow-50' : 'bg-white',
+        ]}
+      >
+        <div class="sm:col-span-3">
+          <div class="flex items-center gap-3">
+            <span
+              class:list={[
+                'grid h-10 w-10 place-items-center border',
+                p.highlight
+                  ? 'border-glacier-300 text-glacier-300'
+                  : 'border-snow-200 bg-snow-50 text-glacier-500',
+              ]}
+            >
+              <Icon name={p.icon} class="h-4 w-4" />
+            </span>
+            <span
+              class:list={[
+                'mono-label',
+                p.highlight ? 'text-glacier-300' : 'text-slate-500',
+              ]}
+            >
+              {p.number}
+            </span>
+          </div>
+          <h3
+            class:list={[
+              'mt-6 text-xl font-semibold tracking-tight',
+              p.highlight ? 'text-snow-50' : 'text-ink-900',
+            ]}
+          >
+            {p.title}
+          </h3>
+          <p
+            class:list={[
+              'mt-2 mono-label',
+              p.highlight ? 'text-slate-400' : 'text-slate-500',
+            ]}
+          >
+            {p.duration}
+          </p>
+        </div>
+
+        <div class="sm:col-span-6">
+          <p
+            class:list={[
+              'text-base leading-relaxed',
+              p.highlight ? 'text-slate-200' : 'text-slate-700',
+            ]}
+          >
+            {p.body}
+          </p>
+        </div>
+
+        <div class="sm:col-span-3">
+          <p
+            class:list={[
+              'mono-label mb-3',
+              p.highlight ? 'text-slate-400' : 'text-slate-500',
+            ]}
+          >
+            Artifacts
+          </p>
+          <ul class="space-y-2 text-sm">
+            {p.artifacts.map((a) => (
+              <li
+                class:list={[
+                  'flex items-start gap-2',
+                  p.highlight ? 'text-slate-200' : 'text-slate-700',
+                ]}
+              >
+                <Icon
+                  name="lucide:check"
+                  class:list={['mt-1 h-3 w-3 shrink-0', p.highlight ? 'text-glacier-300' : 'text-glacier-500']}
+                />
+                <span>{a}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </article>
+    ))
+  }
+</div>

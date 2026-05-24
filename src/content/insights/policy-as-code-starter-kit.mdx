@@ -1,0 +1,42 @@
+---
+title: "A policy-as-code starter kit for teams that have never written one"
+description: "Where to begin if your IaC is already in Terraform but your policies are still in PDF. A practical week-one playbook."
+publishDate: 2026-04-12
+author: "Sagar Chhabra"
+tags: ["policy-as-code", "opa", "terraform"]
+readingTime: "4 min read"
+---
+
+If your Terraform repo has hundreds of resources and your security policies live in a Confluence page no one reads, you don't need a new framework — you need to translate the policies you already have into checks that run on every PR. Here's what we set up in week one of most engagements.
+
+## Pick three controls, not thirty
+
+Start with the controls whose violation costs you most:
+
+1. **IAM least privilege** — no `*` actions, no `*` resources, no inline policies on humans.
+2. **Encryption at rest** — every storage resource carries a KMS key reference.
+3. **Network exposure** — no `0.0.0.0/0` ingress without an explicit approval annotation.
+
+Three controls. Three Rego files. One CI job.
+
+## The tools we reach for
+
+- **Conftest** for Terraform plan output. It's a thin wrapper around OPA with a Terraform-friendly CLI.
+- **OPA / Rego** for the policy language itself. Verbose, but auditor-friendly.
+- **`terraform show -json tfplan`** as the input. The plan output is structured enough to write meaningful rules without parsing HCL.
+
+## The CI integration
+
+A standard GitHub Actions job:
+
+```yaml
+- run: terraform plan -out=tfplan
+- run: terraform show -json tfplan > plan.json
+- run: conftest test plan.json --policy policies/
+```
+
+That's it. Three lines added to your CI, and now every PR has a policy gate.
+
+## What changes on day one
+
+The first PR that violates a policy will fail. The team will be annoyed. They'll ask if it can be a warning instead of a block. The answer is no — warnings are noise; blocks are signal. Within a week, no one writes wildcard IAM anymore. Within a month, the question of "is this compliant?" has the same answer as "did CI pass?" — and that's the entire point.

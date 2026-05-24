@@ -1,0 +1,94 @@
+---
+import Container from './Container.astro';
+import { Icon } from 'astro-icon/components';
+
+const nav = [
+  { label: 'Services', href: '/services' },
+  { label: 'Process', href: '/process' },
+  { label: 'About', href: '/about' },
+  { label: 'Insights', href: '/insights' },
+];
+
+const pathname = new URL(Astro.request.url).pathname;
+---
+
+<header class="sticky top-0 z-40 border-b border-snow-200 bg-snow-50/85 backdrop-blur supports-[backdrop-filter]:bg-snow-50/70">
+  <Container>
+    <div class="flex h-16 items-center justify-between">
+      <a href="/" class="group flex items-center gap-2.5" aria-label="SnowOps home">
+        <span class="grid h-7 w-7 place-items-center border border-ink-900 bg-ink-900 text-snow-50 font-mono text-[11px] font-bold tracking-tight">SO</span>
+        <span class="font-mono text-sm font-semibold tracking-tight text-ink-900">
+          snow<span class="text-glacier-500">/</span>ops
+        </span>
+      </a>
+
+      <nav class="hidden items-center gap-1 md:flex" aria-label="Primary">
+        {
+          nav.map((item) => {
+            const active = pathname === item.href || pathname.startsWith(item.href + '/');
+            return (
+              <a
+                href={item.href}
+                class:list={[
+                  'mono-label px-3 py-2 transition-colors',
+                  active ? 'text-ink-900' : 'text-slate-500 hover:text-ink-900',
+                ]}
+              >
+                {item.label}
+              </a>
+            );
+          })
+        }
+      </nav>
+
+      <div class="flex items-center gap-2">
+        <a
+          href="/contact"
+          class="hidden sm:inline-flex items-center gap-1.5 border border-ink-900 bg-ink-900 px-3.5 py-2 mono-label text-snow-50 transition-colors hover:bg-glacier-500 hover:border-glacier-500"
+        >
+          Free Assessment <Icon name="lucide:arrow-right" class="h-3 w-3" />
+        </a>
+        <button
+          type="button"
+          class="md:hidden grid h-9 w-9 place-items-center border border-snow-200 text-ink-900"
+          aria-label="Open menu"
+          data-mobile-nav-trigger
+        >
+          <Icon name="lucide:menu" class="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  </Container>
+
+  <div
+    id="mobile-nav"
+    class="hidden border-t border-snow-200 bg-snow-50 md:hidden"
+    data-mobile-nav
+  >
+    <Container>
+      <nav class="flex flex-col py-4" aria-label="Mobile">
+        {
+          nav.map((item) => (
+            <a href={item.href} class="border-b border-snow-200 py-3 mono-label text-slate-600 last:border-0">
+              {item.label}
+            </a>
+          ))
+        }
+        <a
+          href="/contact"
+          class="mt-3 inline-flex items-center justify-between border border-ink-900 bg-ink-900 px-4 py-3 mono-label text-snow-50"
+        >
+          Free Assessment <Icon name="lucide:arrow-right" class="h-3.5 w-3.5" />
+        </a>
+      </nav>
+    </Container>
+  </div>
+</header>
+
+<script>
+  const trigger = document.querySelector('[data-mobile-nav-trigger]');
+  const panel = document.querySelector('[data-mobile-nav]');
+  trigger?.addEventListener('click', () => {
+    panel?.classList.toggle('hidden');
+  });
+</script>

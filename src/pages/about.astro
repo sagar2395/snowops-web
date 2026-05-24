@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Container from '../components/layout/Container.astro';
+import Eyebrow from '../components/ui/Eyebrow.astro';
+import Button from '../components/ui/Button.astro';
+import SectionHeading from '../components/ui/SectionHeading.astro';
+import FounderCard from '../components/about/FounderCard.astro';
+---
+
+<BaseLayout
+  title="About — A boutique platform and compliance firm"
+  description="SnowOps is run by two senior practitioners — Sagar Chhabra (infrastructure) and Nidhi Chhabra (compliance). No SDR funnel, no offshore handoff. Senior on every call."
+>
+  <!-- HERO -->
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="grid gap-12 py-20 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <Eyebrow>The firm</Eyebrow>
+          <h1 class="mt-5 text-4xl font-semibold leading-tight tracking-tight text-ink-900 sm:text-5xl">
+            Two senior practitioners.<br />
+            <span class="text-glacier-500">No middle layer.</span>
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
+            SnowOps is small on purpose. There is no SDR funnel, no junior delivery layer, no offshore handoff. The two people who scope your work are the two people who build it. That is the boutique advantage — and the reason our work doesn't degrade between sales and shipping.
+          </p>
+        </div>
+        <div class="lg:col-span-5">
+          <div class="grid gap-px border border-snow-200 bg-snow-200">
+            <div class="bg-white p-6">
+              <p class="mono-label text-slate-500">Headcount</p>
+              <p class="mt-3 font-mono text-3xl font-medium text-ink-900">2 founders</p>
+            </div>
+            <div class="bg-white p-6">
+              <p class="mono-label text-slate-500">Engagement model</p>
+              <p class="mt-3 font-mono text-3xl font-medium text-ink-900">Senior-only</p>
+            </div>
+            <div class="bg-white p-6">
+              <p class="mono-label text-slate-500">Ideal client</p>
+              <p class="mt-3 font-mono text-xl font-medium text-ink-900">B2B SaaS · FinTech · HealthTech, Series A → pre-IPO</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- FOUNDERS -->
+  <section class="border-b border-snow-200 bg-white">
+    <Container>
+      <div class="py-20">
+        <SectionHeading
+          eyebrow="Founders"
+          title="Who you'll actually work with."
+        />
+        <div class="mt-12 grid gap-8 lg:grid-cols-2">
+          <FounderCard
+            initials="SC"
+            name="Sagar Chhabra"
+            role="Infrastructure & Technical Delivery"
+            bio="Sagar leads the engineering work. He architects the platform, writes the IaC modules, builds the pipelines, and runs the sprint demos. Background in production Kubernetes at scale, multi-cloud Terraform, and CI/CD hardening for regulated workloads."
+            focus={['Kubernetes / EKS', 'Terraform', 'GitOps', 'CI/CD', 'AWS', 'GCP']}
+            links={[
+              { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: 'lucide:linkedin' },
+              { label: 'GitHub', href: 'https://github.com/', icon: 'lucide:github' },
+            ]}
+          />
+          <FounderCard
+            initials="NC"
+            name="Nidhi Chhabra"
+            role="Compliance, Risk & Business Operations"
+            bio="Nidhi owns the compliance surface. She maps your business to SOC 2 and ISO 27001 controls, designs the evidence pipeline, drafts auditor narratives, and runs the engagement operations end-to-end. Your auditor will know her name."
+            focus={['SOC 2', 'ISO 27001', 'Risk mapping', 'Audit prep', 'Vendor mgmt', 'Ops']}
+            links={[
+              { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: 'lucide:linkedin' },
+            ]}
+          />
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- HOW WE ENGAGE -->
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="grid gap-12 py-20 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <SectionHeading
+            eyebrow="How we engage"
+            title="Fixed scope. Fixed fee. Live demos."
+            description="We don't sell hours. We sell sprints with explicit deliverables, fixed in writing, demoed on day ten. You always know what you're paying for and when it ships."
+          />
+        </div>
+        <div class="lg:col-span-7">
+          <ul class="grid gap-px border border-snow-200 bg-snow-200 sm:grid-cols-2">
+            <li class="bg-white p-6">
+              <p class="mono-label text-glacier-500">Fixed-fee sprints</p>
+              <p class="mt-3 text-sm leading-relaxed text-slate-700">Each sprint has a defined scope and a defined price. No timesheets.</p>
+            </li>
+            <li class="bg-white p-6">
+              <p class="mono-label text-glacier-500">Written deliverables</p>
+              <p class="mt-3 text-sm leading-relaxed text-slate-700">Every sprint has named artifacts. Code, docs, evidence — listed in the SOW.</p>
+            </li>
+            <li class="bg-white p-6">
+              <p class="mono-label text-glacier-500">Senior continuity</p>
+              <p class="mt-3 text-sm leading-relaxed text-slate-700">The founders are on every call. No reassignment, no rotating team.</p>
+            </li>
+            <li class="bg-white p-6">
+              <p class="mono-label text-glacier-500">Right to exit</p>
+              <p class="mt-3 text-sm leading-relaxed text-slate-700">Engagement is sprint-by-sprint. End it any time. Your code stays yours.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="border-b border-ink-800 bg-ink-950 text-snow-50">
+    <Container>
+      <div class="flex flex-col items-start gap-6 py-20 lg:flex-row lg:items-end lg:justify-between">
+        <div class="max-w-2xl">
+          <Eyebrow tone="inverse">Talk to us</Eyebrow>
+          <h2 class="mt-5 text-3xl font-semibold tracking-tight sm:text-4xl">
+            The first call is short. The TAR speaks for itself.
+          </h2>
+        </div>
+        <Button href="/contact" class="!border-snow-50 !bg-snow-50 !text-ink-900 hover:!border-glacier-300 hover:!bg-glacier-300">
+          Request your assessment
+        </Button>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

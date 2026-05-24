@@ -1,0 +1,84 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Container from '../../components/layout/Container.astro';
+import Eyebrow from '../../components/ui/Eyebrow.astro';
+import { Icon } from 'astro-icon/components';
+
+const insights = (await getCollection('insights')).sort(
+  (a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime(),
+);
+
+const formatDate = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<BaseLayout
+  title="Insights — Notes from the platform engineering frontier"
+  description="Field notes from the SnowOps team on platform engineering, compliance enablement, and the operational realities of building audit-ready cloud infrastructure."
+>
+  <!-- HERO -->
+  <section class="border-b border-snow-200 bg-snow-50">
+    <Container>
+      <div class="py-20 lg:py-24">
+        <Eyebrow>Insights</Eyebrow>
+        <h1 class="mt-5 max-w-3xl text-4xl font-semibold leading-tight tracking-tight text-ink-900 sm:text-5xl">
+          Notes from the platform<br />
+          <span class="text-glacier-500">engineering frontier.</span>
+        </h1>
+        <p class="mt-6 max-w-2xl text-lg leading-relaxed text-slate-600">
+          Field-tested writing on what actually works — and what doesn't — when you're building production cloud infrastructure under audit pressure.
+        </p>
+      </div>
+    </Container>
+  </section>
+
+  <!-- LIST -->
+  <section class="border-b border-snow-200 bg-white">
+    <Container>
+      <div class="py-16 lg:py-20">
+        <ul class="grid gap-px border border-snow-200 bg-snow-200">
+          {
+            insights.map((insight) => (
+              <li class="bg-white">
+                <a
+                  href={`/insights/${insight.id}`}
+                  class="group flex flex-col gap-6 p-8 transition-colors hover:bg-snow-50 sm:flex-row sm:items-start sm:justify-between sm:gap-12 sm:p-10"
+                >
+                  <div class="max-w-3xl">
+                    <div class="flex flex-wrap items-center gap-3 mono-label text-slate-500">
+                      <time datetime={insight.data.publishDate.toISOString()}>
+                        {formatDate(insight.data.publishDate)}
+                      </time>
+                      {insight.data.readingTime && (
+                        <>
+                          <span>·</span>
+                          <span>{insight.data.readingTime}</span>
+                        </>
+                      )}
+                      {insight.data.tags.length > 0 && (
+                        <>
+                          <span>·</span>
+                          <span>{insight.data.tags.join(' / ')}</span>
+                        </>
+                      )}
+                    </div>
+                    <h2 class="mt-4 text-xl font-semibold leading-snug tracking-tight text-ink-900 transition-colors group-hover:text-glacier-500 sm:text-2xl">
+                      {insight.data.title}
+                    </h2>
+                    <p class="mt-3 text-base leading-relaxed text-slate-600">
+                      {insight.data.description}
+                    </p>
+                  </div>
+                  <span class="mono-label inline-flex shrink-0 items-center gap-1 self-start text-slate-500 transition-colors group-hover:text-glacier-500 sm:mt-1">
+                    Read <Icon name="lucide:arrow-up-right" class="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </Container>
+  </section>
+</BaseLayout>

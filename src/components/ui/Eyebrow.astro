@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+  tone?: 'default' | 'inverse' | 'accent';
+}
+
+const { class: className = '', tone = 'default' } = Astro.props;
+
+const tones: Record<NonNullable<Props['tone']>, string> = {
+  default: 'text-slate-500',
+  inverse: 'text-slate-400',
+  accent: 'text-glacier-500',
+};
+---
+
+<p class={`mono-label ${tones[tone]} ${className}`}>
+  <slot />
+</p>

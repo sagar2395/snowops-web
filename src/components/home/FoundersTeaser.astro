@@ -1,0 +1,54 @@
+---
+import Container from '../layout/Container.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+
+const founders = [
+  {
+    initials: 'SC',
+    name: 'Sagar Chhabra',
+    role: 'Infrastructure & Technical Delivery',
+    body: 'Kubernetes, Terraform, CI/CD. Architects the platform; ships the code.',
+  },
+  {
+    initials: 'NC',
+    name: 'Nidhi Chhabra',
+    role: 'Compliance, Risk & Business Operations',
+    body: 'SOC 2 and ISO 27001 mapping. Designs the control surface; owns the audit narrative.',
+  },
+];
+---
+
+<section class="border-b border-snow-200 bg-snow-50">
+  <Container>
+    <div class="grid gap-12 py-20 lg:grid-cols-12">
+      <div class="lg:col-span-5">
+        <SectionHeading
+          eyebrow="The Firm"
+          title="Boutique by design. Senior on every call."
+          description="No SDR funnel. No offshore handoff. You work with the two people who designed your platform — from first sprint to final handover."
+        />
+        <div class="mt-10">
+          <Button href="/about" variant="link">Meet the founders</Button>
+        </div>
+      </div>
+
+      <div class="grid gap-px border border-snow-200 bg-snow-200 sm:grid-cols-2 lg:col-span-7">
+        {
+          founders.map((f) => (
+            <div class="flex flex-col gap-5 bg-white p-7">
+              <span class="grid h-16 w-16 place-items-center border border-snow-200 bg-snow-50 font-mono text-lg font-semibold tracking-tight text-ink-900">
+                {f.initials}
+              </span>
+              <div>
+                <h3 class="text-base font-semibold text-ink-900">{f.name}</h3>
+                <p class="mt-1 mono-label text-glacier-500">{f.role}</p>
+              </div>
+              <p class="text-sm leading-relaxed text-slate-600">{f.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </Container>
+</section>

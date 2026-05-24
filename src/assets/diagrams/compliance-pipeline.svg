@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Compliance pipeline diagram">
+  <style>
+    .label { font: 600 11px ui-monospace, 'JetBrains Mono', monospace; fill: #0b1220; }
+    .sub { font: 500 9px ui-monospace, 'JetBrains Mono', monospace; fill: #64748b; letter-spacing: 0.08em; text-transform: uppercase; }
+    .num { font: 600 10px ui-monospace, 'JetBrains Mono', monospace; fill: #1d4ed8; letter-spacing: 0.1em; }
+    .box { fill: #ffffff; stroke: #334155; stroke-width: 1.25; }
+    .accent-box { fill: #ffffff; stroke: #1d4ed8; stroke-width: 1.5; }
+    .stroke { fill: none; stroke: #334155; stroke-width: 1.25; }
+    .accent { fill: none; stroke: #1d4ed8; stroke-width: 1.5; }
+  </style>
+
+  <text x="20" y="30" class="sub">SOC 2 · ISO 27001 · evidence pipeline</text>
+  <line x1="20" y1="44" x2="620" y2="44" stroke="#cbd5e1" stroke-width="1" />
+
+  <!-- Controls -->
+  <text x="20" y="80" class="num">01</text>
+  <rect x="20" y="90" width="170" height="56" class="box" />
+  <text x="32" y="111" class="label">control library</text>
+  <text x="32" y="129" class="sub">mapped to SOC 2 · ISO 27001</text>
+
+  <!-- Policy as code -->
+  <text x="230" y="80" class="num">02</text>
+  <rect x="230" y="90" width="170" height="56" class="accent-box" />
+  <text x="242" y="111" class="label">policy-as-code</text>
+  <text x="242" y="129" class="sub">opa · kyverno · conftest</text>
+
+  <!-- Enforce -->
+  <text x="440" y="80" class="num">03</text>
+  <rect x="440" y="90" width="180" height="56" class="box" />
+  <text x="452" y="111" class="label">enforced at ci + cluster</text>
+  <text x="452" y="129" class="sub">block · don't warn</text>
+
+  <path d="M190 118 L230 118" class="accent" />
+  <polygon points="230,118 222,114 222,122" fill="#1d4ed8" />
+  <path d="M400 118 L440 118" class="accent" />
+  <polygon points="440,118 432,114 432,122" fill="#1d4ed8" />
+
+  <!-- Evidence -->
+  <text x="20" y="190" class="num">04</text>
+  <rect x="20" y="200" width="280" height="56" class="box" />
+  <text x="32" y="221" class="label">continuous evidence collection</text>
+  <text x="32" y="239" class="sub">artifacts · attestations · runtime logs</text>
+
+  <!-- Audit -->
+  <text x="340" y="190" class="num">05</text>
+  <rect x="340" y="200" width="280" height="56" class="accent-box" />
+  <text x="352" y="221" class="label">audit-ready dashboard</text>
+  <text x="352" y="239" class="sub">one click → packaged report</text>
+
+  <path d="M300 228 L340 228" class="accent" />
+  <polygon points="340,228 332,224 332,232" fill="#1d4ed8" />
+
+  <!-- vertical flow -->
+  <path d="M105 146 L105 200" class="stroke" />
+  <polygon points="105,200 101,192 109,192" fill="#334155" />
+  <path d="M530 146 L530 200" class="stroke" />
+  <polygon points="530,200 526,192 534,192" fill="#334155" />
+
+  <!-- Footer band -->
+  <rect x="20" y="290" width="600" height="46" fill="#0b1220" />
+  <text x="36" y="318" class="label" style="fill:#f8fafc">outcome</text>
+  <text x="120" y="318" class="sub" style="fill:#93c5fd">audit closed in days, not quarters</text>
+</svg>
