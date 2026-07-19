@@ -1,6 +1,8 @@
 ---
 import Container from './Container.astro';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import mark from '../../assets/mark.svg';
 
 const nav = [
   { label: 'Services', href: '/services' },
@@ -16,7 +18,7 @@ const pathname = new URL(Astro.request.url).pathname;
   <Container>
     <div class="flex h-16 items-center justify-between">
       <a href="/" class="group flex items-center gap-2.5" aria-label="SnowOps home">
-        <span class="grid h-7 w-7 place-items-center border border-ink-900 bg-ink-900 text-snow-50 font-mono text-[11px] font-bold tracking-tight">SO</span>
+        <Image src={mark} alt="" width={28} height={28} class="h-7 w-7" />
         <span class="font-mono text-sm font-semibold tracking-tight text-ink-900">
           snow<span class="text-glacier-500">/</span>ops
         </span>

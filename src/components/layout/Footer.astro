@@ -1,6 +1,8 @@
 ---
 import Container from './Container.astro';
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
+import markOndark from '../../assets/mark-ondark.svg';
 
 const year = new Date().getFullYear();
 
@@ -37,7 +39,7 @@ const cols = [
     <div class="grid gap-12 py-16 md:grid-cols-12">
       <div class="md:col-span-5">
         <a href="/" class="flex items-center gap-2.5" aria-label="SnowOps home">
-          <span class="grid h-7 w-7 place-items-center border border-snow-50 bg-snow-50 text-ink-950 font-mono text-[11px] font-bold tracking-tight">SO</span>
+          <Image src={markOndark} alt="" width={28} height={28} class="h-7 w-7" />
           <span class="font-mono text-sm font-semibold tracking-tight">
             snow<span class="text-glacier-300">/</span>ops
           </span>
